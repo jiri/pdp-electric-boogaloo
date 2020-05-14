@@ -66,7 +66,7 @@ int main(int argc, const char** argv) {
     printf("Problem: %s\n", problem.name.c_str());
     printf_solution("Solution", result.solution, problem.n);
     printf("Weight: %f\n", result.weight);
-    printf("Elapsed time: %3fs", elapsed_time.count());
+    printf("Elapsed time: %3fs\n", elapsed_time.count());
 
     return 0;
 }

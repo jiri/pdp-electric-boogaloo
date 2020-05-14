@@ -102,7 +102,7 @@ int main(int argc, const char** argv) {
     printf("Problem: %s\n", problem.name.c_str());
     printf_vector("Solution", bestSolution);
     printf("Weight: %f\n", bestWeight);
-    printf("Elapsed time: %3fs", elapsed_time.count());
+    printf("Elapsed time: %3fs\n", elapsed_time.count());
 
     return 0;
 }

@@ -47,4 +47,9 @@ namespace Util {
             assert(false);
         }
     }
+
+    void print_usage_and_exit(int argc, const char** argv) {
+        fprintf(stderr, "Usage: %s PROBLEM", argv[0]);
+        exit(EXIT_FAILURE);
+    }
 }

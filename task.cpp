@@ -1,9 +1,10 @@
 #include <cstdint>
 #include <cstdio>
 #include <cassert>
-
 #include <string_view>
 #include <vector>
+
+#include <omp.h>
 
 #include "Problem.hpp"
 #include "Util.hpp"
@@ -72,6 +73,13 @@ void solve(int pos, VSolution solution, float weight) {
 }
 
 int main(int argc, const char** argv) {
+    // Override thread count
+    if (argc >= 3) {
+        int num_threads = std::stoi(argv[2]);
+        omp_set_dynamic(0);
+        omp_set_num_threads(num_threads);
+    }
+
     // Load data
     problem = Problem::load(argc, argv);
 

@@ -5,6 +5,8 @@
 
 #include <mpi.h>
 
+#include "Util.hpp"
+
 using namespace std::string_literals;
 
 Problem Problem::load(std::string_view path) {
@@ -34,12 +36,11 @@ Problem Problem::load(std::string_view path) {
 }
 
 Problem Problem::load(int argc, const char **argv) {
-    if (argc < 2 || argc > 2) {
-        fprintf(stderr, "Usage: %s PROBLEM", argv[0]);
-        exit(EXIT_FAILURE);
+    if (argc < 2) {
+        Util::print_usage_and_exit(argc, argv);
     }
 
-    return Problem::load("data/"s + argv[1]);
+    return Problem::load(argv[1]);
 }
 
 #ifdef USE_MPI

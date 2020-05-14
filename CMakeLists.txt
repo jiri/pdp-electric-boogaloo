@@ -10,6 +10,7 @@ find_package(MPI REQUIRED)
 
 # Problem loading
 add_library(problem Problem.cpp Util.cpp)
+target_compile_definitions(problem PUBLIC USE_MPI)
 target_link_libraries(problem PUBLIC MPI::MPI_CXX)
 
 # Sequential solution
@@ -26,4 +27,5 @@ target_link_libraries(data_parallelism PUBLIC problem OpenMP::OpenMP_CXX)
 
 # OpenMPI
 add_executable(openmpi mpi.cpp)
+target_compile_definitions(openmpi PUBLIC USE_MPI)
 target_link_libraries(openmpi PUBLIC problem)

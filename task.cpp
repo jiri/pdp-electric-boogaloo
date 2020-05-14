@@ -65,11 +65,8 @@ void solve(int pos, VSolution solution, float weight) {
         solve(pos + 1, solution, weight);
     }
 
-    #pragma omp task if (pos < problem.n - THRESHOLD)
-    {
-        solution[pos] = 2;
-        solve(pos + 1, std::move(solution), weight);
-    }
+    solution[pos] = 2;
+    solve(pos + 1, std::move(solution), weight);
 }
 
 int main(int argc, const char** argv) {

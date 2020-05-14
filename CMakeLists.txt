@@ -5,14 +5,12 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "-O3")
 
 # Libraries
-find_package(fmt REQUIRED)
 find_package(OpenMP REQUIRED)
 find_package(MPI REQUIRED)
-# find_package(Microsoft.GSL REQUIRED)
 
 # Problem loading
 add_library(problem Problem.cpp Util.cpp)
-target_link_libraries(problem PUBLIC fmt::fmt MPI::MPI_CXX)
+target_link_libraries(problem PUBLIC MPI::MPI_CXX)
 
 # Sequential solution
 add_executable(sequential sequential.cpp)

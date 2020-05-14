@@ -2,8 +2,6 @@
 
 #include <string_view>
 
-#include <fmt/format.h>
-
 #include "Problem.hpp"
 #include "Util.hpp"
 

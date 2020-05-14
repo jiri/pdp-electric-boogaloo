@@ -3,7 +3,6 @@
 #include <cassert>
 #include <string>
 
-#include <gsl/gsl>
 #include <mpi.h>
 
 using namespace std::string_literals;
@@ -15,7 +14,6 @@ Problem Problem::load(std::string_view path) {
 
     FILE *file = fopen(path.data(), "r");
     assert(file);
-    auto cleanup = gsl::finally([=] { fclose(file); });
 
     fscanf(file, "%u %u %u", &p.n, &p.k, &p.b);
 
@@ -31,6 +29,7 @@ Problem Problem::load(std::string_view path) {
         p.exclusions[a] = b;
     }
 
+    fclose(file);
     return p;
 }
 

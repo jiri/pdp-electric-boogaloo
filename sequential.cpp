@@ -56,6 +56,8 @@ void solve(int pos, float weight) {
 
     solution[pos] = 2;
     solve(pos + 1, weight);
+
+    solution[pos] = 0;
 }
 
 int main(int argc, const char** argv) {

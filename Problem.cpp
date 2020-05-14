@@ -42,6 +42,8 @@ Problem Problem::load(int argc, const char **argv) {
     return Problem::load("data/"s + argv[1]);
 }
 
+#ifdef USE_MPI
+
 void Problem::send(int dest) const {
     // Params
     MPI_Send(&this->n, 1, MPI_UINT32_T, dest, 0, MPI_COMM_WORLD);
@@ -107,3 +109,5 @@ Problem Problem::receive(int src) {
 
     return result;
 }
+
+#endif

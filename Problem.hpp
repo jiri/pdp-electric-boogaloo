@@ -23,7 +23,9 @@ public:
     static Problem load(int argc, const char** argv);
     static Problem load(std::string_view path);
 
+#ifdef USE_MPI
     // OpenMPI convenience functions
     void send(int dest) const;
     static Problem receive(int src);
+#endif
 };

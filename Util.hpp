@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <chrono>
 
 #define timed Timer() + [&]()
@@ -32,4 +33,18 @@ void printf_solution(const char* title, uint64_t value, int n) {
         printf("%d", (value & (1 << i)) ? 2 : 1);
     }
     printf("]\n");
+}
+
+namespace Util {
+    int32_t invert(int32_t group) {
+        if (group == 1) {
+            return 2;
+        }
+        else if (group == 2) {
+            return 1;
+        }
+        else {
+            assert(false);
+        }
+    }
 }

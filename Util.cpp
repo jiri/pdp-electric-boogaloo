@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cstdio>
+#include <cstdlib>
 
 void printf_vector(const char *title, const std::vector<uint8_t> &values) {
     printf("%s: [", title);

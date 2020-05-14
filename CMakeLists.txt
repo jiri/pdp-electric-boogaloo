@@ -11,7 +11,7 @@ find_package(MPI REQUIRED)
 # find_package(Microsoft.GSL REQUIRED)
 
 # Problem loading
-add_library(problem Problem.cpp)
+add_library(problem Problem.cpp Util.cpp)
 target_link_libraries(problem PUBLIC fmt::fmt MPI::MPI_CXX)
 
 # Sequential solution

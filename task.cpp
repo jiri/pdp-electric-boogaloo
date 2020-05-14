@@ -55,7 +55,8 @@ void solve(int pos, VSolution solution, float weight) {
 
     // Value already set
     if (solution[pos] != 0) {
-        return solve(pos + 1, std::move(solution), weight);
+        solve(pos + 1, std::move(solution), weight);
+        return;
     }
 
     // Recurse

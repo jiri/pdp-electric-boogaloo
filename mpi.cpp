@@ -292,7 +292,7 @@ int main(int argc, char** argv) {
         // Print results
         printf("Variant: OpenMPI\n");
         printf("Problem: %s\n", problem.name.c_str());
-        printf("Threads: %d\n", omp_get_num_threads());
+        printf("Threads: %d\n", num_threads);
         printf_vector("Solution", bestSolution);
         printf("Weight: %f\n", bestWeight);
         printf("Elapsed time: %3fs\n", elapsed_time.count());

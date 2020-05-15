@@ -309,7 +309,7 @@ int main(int argc, char** argv) {
                 #pragma omp for schedule(dynamic)
                 for (size_t i = 0; i < suspensions.size(); i++) {
                     // LOG("Processing job %d [pos=%d, solution.size=%u, weight=%f]", i, suspensions[i].pos, suspensions[i].solution.size(), suspensions[i].weight);
-                    printf_vector("DEBUG", suspensions[i].solution);
+                    // printf_vector("DEBUG", suspensions[i].solution);
                     solve(suspensions[i].pos, std::move(suspensions[i].solution), suspensions[i].weight);
                     // LOG("Done with job %d", i);
                 }

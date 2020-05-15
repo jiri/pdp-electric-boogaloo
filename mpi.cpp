@@ -281,7 +281,7 @@ int main(int argc, char** argv) {
         };
 
         // Print results
-        printf("Variant: Data parallelism\n");
+        printf("Variant: OpenMPI\n");
         printf("Problem: %s\n", problem.name.c_str());
         printf_vector("Solution", bestSolution);
         printf("Weight: %f\n", bestWeight);

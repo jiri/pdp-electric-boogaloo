@@ -72,11 +72,14 @@ void solve(int pos, VSolution solution, float weight) {
 
 int main(int argc, const char** argv) {
     // Override thread count
-    if (argc >= 3) {
-        int num_threads = std::stoi(argv[2]);
-        omp_set_dynamic(0);
-        omp_set_num_threads(num_threads);
+    if (argc < 3) {
+        printf("USAGE: ./task PROBLEM THREADS");
+        exit(EXIT_FAILURE);
     }
+
+    int num_threads = std::stoi(argv[2]);
+    omp_set_dynamic(0);
+    omp_set_num_threads(num_threads);
 
     // Load data
     problem = Problem::load(argc, argv);
@@ -106,7 +109,7 @@ int main(int argc, const char** argv) {
     // Print results
     printf("Variant: Task parallelism\n");
     printf("Problem: %s\n", problem.name.c_str());
-    printf("Threads: %d\n", omp_get_num_threads());
+    printf("Threads: %d\n", num_threads);
     printf_vector("Solution", bestSolution);
     printf("Weight: %f\n", bestWeight);
     printf("Elapsed time: %3fs\n", elapsed_time.count());

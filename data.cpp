@@ -130,11 +130,14 @@ void solve(int pos, VSolution solution, float weight) {
 
 int main(int argc, const char** argv) {
     // Override thread count
-    if (argc >= 3) {
-        int num_threads = std::stoi(argv[2]);
-        omp_set_dynamic(0);
-        omp_set_num_threads(num_threads);
+    if (argc < 3) {
+        printf("USAGE: ./data PROBLEM THREADS");
+        exit(EXIT_FAILURE);
     }
+
+    int num_threads = std::stoi(argv[2]);
+    omp_set_dynamic(0);
+    omp_set_num_threads(num_threads);
 
     maxDepth = log2(omp_get_num_threads()) + 1;
 

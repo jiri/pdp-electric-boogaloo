@@ -209,6 +209,15 @@ void solve(int pos, VSolution solution, float weight) {
 #define LOG(format, ...) printf(("#%d " format "\n"), proc_num __VA_OPT__(,) __VA_ARGS__)
 
 int main(int argc, char** argv) {
+    if (argc < 3) {
+        printf("USAGE: ./mpi PROBLEM THREADS");
+        exit(EXIT_FAILURE);
+    }
+
+    int num_threads = std::stoi(argv[2]);
+    omp_set_dynamic(0);
+    omp_set_num_threads(num_threads);
+
     int provided;
     int required = MPI_THREAD_FUNNELED;
     MPI_Init_thread(&argc, &argv, required, &provided);

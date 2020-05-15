@@ -28,4 +28,4 @@ target_link_libraries(data_parallelism PUBLIC problem OpenMP::OpenMP_CXX)
 # OpenMPI
 add_executable(openmpi mpi.cpp)
 target_compile_definitions(openmpi PUBLIC USE_MPI)
-target_link_libraries(openmpi PUBLIC problem)
+target_link_libraries(openmpi PUBLIC problem OpenMP::OpenMP_CXX)

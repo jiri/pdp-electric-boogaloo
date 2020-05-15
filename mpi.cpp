@@ -221,19 +221,19 @@ int main(int argc, char** argv) {
 
     // Load or receive problem
     if (proc_num == 0) {
-        LOG("Inside master");
+        // LOG("Inside master");
         problem = Problem::load(argc, const_cast<const char **>(argv));
 
         for (int dest = 1; dest < num_procs; dest++) {
-            LOG("Sending problem to %d", dest);
+            // LOG("Sending problem to %d", dest);
             problem.send(dest);
         }
 
-        LOG("Sent problems");
+        // LOG("Sent problems");
 
         // Calculate maxDepth for workers
         maxDepth = log2(num_procs) + 1;
-        LOG("Setting maxDepth = %d", maxDepth);
+        // LOG("Setting maxDepth = %d", maxDepth);
 
         auto elapsed_time = timed {
             // Find partial solutions
@@ -269,7 +269,7 @@ int main(int argc, char** argv) {
                     bestWeight = result.weight;
                 }
 
-                LOG("Worker %d done", maxDepth);
+                // LOG("Worker %d done", maxDepth);
                 workers.push(worker_id);
             }
 
@@ -292,30 +292,30 @@ int main(int argc, char** argv) {
     }
     else {
         problem = Problem::receive(0);
-        LOG("Problem received [n=%d]", problem.n);
+        // LOG("Problem received [n=%d]", problem.n);
 
         // Calculate maxDepth for threads
         maxDepth = log2(omp_get_num_threads()) + 1;
 
         while (auto job = SuspendedExecution::receive(0)) {
-            LOG("Job received [pos=%d, weight=%f]", job->pos, job->weight);
+            // LOG("Job received [pos=%d, weight=%f]", job->pos, job->weight);
 
             // Find partial solutions
             partial_solve(job->pos, std::move(job->solution), job->weight, 0);
-            LOG("%d partial solutions found", suspensions.size());
+            // LOG("%d partial solutions found", suspensions.size());
 
             #pragma omp parallel
             {
                 #pragma omp for schedule(dynamic)
                 for (size_t i = 0; i < suspensions.size(); i++) {
-                    LOG("Processing job %d [pos=%d, solution.size=%u, weight=%f]", i, suspensions[i].pos, suspensions[i].solution.size(), suspensions[i].weight);
+                    // LOG("Processing job %d [pos=%d, solution.size=%u, weight=%f]", i, suspensions[i].pos, suspensions[i].solution.size(), suspensions[i].weight);
                     printf_vector("DEBUG", suspensions[i].solution);
                     solve(suspensions[i].pos, std::move(suspensions[i].solution), suspensions[i].weight);
-                    LOG("Done with job %d", i);
+                    // LOG("Done with job %d", i);
                 }
             }
 
-            LOG("Solution found");
+            // LOG("Solution found");
 
             suspensions.clear();
 
@@ -323,7 +323,7 @@ int main(int argc, char** argv) {
             Result result { std::move(bestSolution), bestWeight };
             result.send(0);
 
-            LOG("Solution sent");
+            // LOG("Solution sent");
         }
 
         MPI_Finalize();
